@@ -31,6 +31,7 @@ public class SpotifyService {
         this.restClient = restClient;
     }
 
+    // _evitar sobreescibir eltoken
     private synchronized String getAccessToken() {
 
         if (accessToken != null &&
@@ -40,13 +41,13 @@ public class SpotifyService {
 
         String credentials = clientId + ":" + clientSecret;
 
+        // _encriptar credenciales
         String encodedCredentials = Base64.getEncoder()
                 .encodeToString(
                         credentials.getBytes(StandardCharsets.UTF_8)
                 );
 
-        MultiValueMap<String, String> form =
-                new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> form =new LinkedMultiValueMap<>();
 
         form.add("grant_type", "client_credentials");
 
